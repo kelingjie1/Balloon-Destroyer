@@ -1,25 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Balloom : MonoBehaviour 
 {
 
     public float hp;
+    public float hardness;
+    public float armor;
     public float speed;
+    public List<Ammo> aimAmmos = new List<Ammo>();
+    public List<Cannon> aimCannons = new List<Cannon>();
     public static Balloom Create()
     {
         return ResourceManager.LoadGameObject("Prefab/Game/Balloom").GetComponent<Balloom>();
     }
-	public void Attack(float damage)
+    public void Hit(float damage, float puncture)
     {
-        hp -= damage;
-        if (hp<0)
+        if (puncture >= hardness)
         {
-            GameObject.Destroy(this.gameObject);
+            if (damage>=armor)
+            {
+                hp -= damage - armor;
+                if (hp < 0)
+                {
+                    GameObject.Destroy(this.gameObject);
+                }
+            }
+            
         }
+        
     }
-	
-	// Update is called once per frame
+
 	void Update () 
     {
         this.transform.Translate(new Vector3(-Time.deltaTime * speed, 0, 0));
