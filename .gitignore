@@ -1,0 +1,10 @@
+*.suo
+*.DotSettings
+*.userprefs
+src/Library/
+src/Temp/
+src/obj/
+src/UnityVS.*
+*.csproj
+*.sln
+src/src.sln

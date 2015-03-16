@@ -1,0 +1,7 @@
+//”Œœ∑œ‡πÿ
+StartSpeed=100
+
+AddSpeed=10
+
+
+ServerUri="http://182.254.202.167:8080/app/service"
