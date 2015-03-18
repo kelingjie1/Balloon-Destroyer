@@ -7,9 +7,10 @@ public class Cannon : MonoBehaviour
     public Balloom target;
     public float damage;
     public float puncture;
-
+    public Vector3 direction = new Vector3(1, 0, 0);
     public float shotSpeed;
     public float restTime;
+    
     public virtual void Awake()
     {
         EventManager.Instance.RegisterEvent(EventDefine.BalloomAppear, BalloomAppear);
@@ -42,14 +43,7 @@ public class Cannon : MonoBehaviour
         ammo.target = target;
         ammo.speed = speed;
         BattleFeild.Instance.gameObject.AddChild(ammo.gameObject);
-        if (target)
-        {
-            ammo.direction = (target.transform.localPosition - this.transform.localPosition).normalized;
-        }
-        else
-        {
-            ammo.direction = new Vector3(1, 0, 0);
-        }
+        ammo.direction = this.direction;
         ammo.transform.localPosition = this.transform.localPosition;
         return ammo;
     }
@@ -61,5 +55,15 @@ public class Cannon : MonoBehaviour
             restTime = 1/shotSpeed;
             Shot();
         }
+        if (target)
+        {
+            this.direction = (target.transform.localPosition - this.transform.localPosition).normalized;
+        }
+        int dir = 1;
+        if (this.direction.y<0)
+        {
+            dir = -1;
+        }
+        this.transform.localEulerAngles = new Vector3(0, 0, dir * Vector3.Angle(new Vector3(1, 0, 0), this.direction));
 	}
 }

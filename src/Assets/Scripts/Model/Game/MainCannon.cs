@@ -11,11 +11,12 @@ public class MainCannon : Cannon
         speed = 1;
     }
 
-    public override Ammo Shot()
+    public override void Update()
     {
-        Ammo ammo = base.Shot();
-        ammo.direction = (Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2) - this.transform.localPosition).normalized;
-        return ammo;
+        this.direction = (Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2) - this.transform.localPosition).normalized;
+        base.Update();
+
     }
+    
     
 }
