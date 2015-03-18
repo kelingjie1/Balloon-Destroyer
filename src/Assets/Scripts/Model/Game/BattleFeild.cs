@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class BattleFeild : MonoBehaviour 
 {
-    public static BattleFeild instance;
+    public static BattleFeild Instance;
     public List<Balloom> ballooms = new List<Balloom>();
     float restTime;
 	void Awake () 
     {
-        instance = this;
+        Instance = this;
 	}
 	
 	// Update is called once per frame

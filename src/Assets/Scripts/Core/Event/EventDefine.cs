@@ -4,10 +4,9 @@ using System.Collections;
 
 public enum EventDefine
 {
-    MoneyChange,    //金钱改变
-	LoginServerComplete, // Login complete
-	UpdateAppComplete,   // check app version and download config and resources
-	ErrorCodeReply,
+    BalloomAppear,      //气球出现，需要开始寻找目标
+    BalloomDesappear,   //气球消失，需要重新寻找目标
+
 } 
 
 

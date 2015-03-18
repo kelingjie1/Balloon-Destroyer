@@ -3,37 +3,44 @@ using System.Collections;
 
 public class Ammo : MonoBehaviour
 {
-
-    public Vector3 speed;
-    Balloom m_target;
-    public Balloom target
-    {
-        get
-        {
-            return m_target;
-        }
-        set
-        {
-            if (m_target)
-            {
-                m_target.aimAmmos.Remove(this);
-            }
-            m_target = value;
-            m_target.aimAmmos.Add(this);
-        }
-    }
+    public Vector3 direction;
+    public float speed;
+    public Balloom target;
     public float damage;
     public float puncture;
     public static Ammo Create()
     {
-        return ResourceManager.LoadGameObject("prefab/Game/Ammo").GetComponent<Ammo>();
+        return ResourceManager.LoadGameObject("prefab/Game/Ammo").AddComponent<Ammo>();
     }
-    void Update()
+    public virtual void Awake()
     {
-        this.transform.Translate(Time.deltaTime * speed);
+        EventManager.Instance.RegisterEvent(EventDefine.BalloomAppear, BalloomAppear);
+        EventManager.Instance.RegisterEvent(EventDefine.BalloomDesappear, BalloomDesappear);
     }
-
-    void OnCollisionEnter(Collision collision)
+    public virtual void BalloomAppear(EventDefine define, object param1, object param2, object param3, object param4)
+    {
+        if (target == null)
+        {
+            FindTarget();
+        }
+    }
+    public virtual void BalloomDesappear(EventDefine define, object param1, object param2, object param3, object param4)
+    {
+        FindTarget();
+    }
+    public virtual Balloom FindTarget()
+    {
+        return null;
+    }
+    public virtual void Update()
+    {
+        if (target)
+        {
+            direction = (target.transform.localPosition - this.transform.localPosition).normalized;
+        }
+        this.transform.Translate(Time.deltaTime * speed * direction);
+    }
+    public virtual void OnCollisionEnter(Collision collision)
     {
         Balloom balloom = collision.gameObject.GetComponent<Balloom>();
         if (balloom)
