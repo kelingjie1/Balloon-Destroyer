@@ -11,7 +11,7 @@ public class BattleFeild : MonoBehaviour
 	void Awake () 
     {
         Instance = this;
-		CannonManger.GetInstance().InitAllCannon();
+		CannonManger.GetInstance();
 	}
 	
 	// Update is called once per frame
