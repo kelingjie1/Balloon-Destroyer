@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class Cannon : MonoBehaviour
 {
+
+	//基础属性
     public float speed;
     public Balloom target;
     public float damage;
@@ -10,7 +14,10 @@ public class Cannon : MonoBehaviour
     public Vector3 direction = new Vector3(1, 0, 0);
     public float shotSpeed;
     public float restTime;
-    
+
+	public bool   m_bOnFight; //是否在出战状态
+	public bool   m_bUnLock;  //是否解锁
+
     public virtual void Awake()
     {
         EventManager.Instance.RegisterEvent(EventDefine.BalloomAppear, BalloomAppear);

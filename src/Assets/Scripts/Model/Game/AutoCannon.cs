@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AutoCannon : Cannon 
+
+public class AutoCannon : Cannon
 {
+
     public override void Awake()
     {
         base.Awake();
