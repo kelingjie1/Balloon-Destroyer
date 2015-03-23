@@ -5,10 +5,11 @@ using System.Collections.Generic;
 public class Balloom : MonoBehaviour 
 {
 
-    public float hp;
-    public float hardness;
-    public float armor;
-    public float speed;
+    public float hp;            //生命
+    public float hardness;      //硬度
+    public float armor;         //护甲
+    public float speed;         //速度
+    public float cover;         //隐蔽
     public static Balloom Create()
     {
         return ResourceManager.LoadGameObject("Prefab/Game/Balloom").GetComponent<Balloom>();

@@ -3,12 +3,15 @@ using System.Collections;
 
 public class Cannon : MonoBehaviour
 {
-    public float speed;
-    public Balloom target;
-    public float damage;
-    public float puncture;
+    public float speed;         //子弹飞行速度
+    public Balloom target;      //瞄准目标
+    public float damage;        //攻击力
+    public int puncture;        //穿透
+    public float ArmorBreak;    //破甲
+    public float shotSpeed;     //攻击速度
+    public float investigation; //侦查力
     public Vector3 direction = new Vector3(1, 0, 0);
-    public float shotSpeed;
+    
     public float restTime;
     
     public virtual void Awake()
