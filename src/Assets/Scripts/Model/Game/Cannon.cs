@@ -7,9 +7,9 @@ public class Cannon : MonoBehaviour
 {
     public float speed;         //子弹飞行速度
     public Balloom target;      //瞄准目标
-    public float damage;        //攻击力
+    public float attack;        //攻击力
     public int puncture;        //穿透
-    public float ArmorBreak;    //破甲
+    public float armorBreak;    //破甲
     public float shotSpeed;     //攻击速度
     public float investigation; //侦查力
     public Vector3 direction = new Vector3(1, 0, 0);
@@ -22,7 +22,7 @@ public class Cannon : MonoBehaviour
     public virtual void Awake()
     {
         EventManager.Instance.RegisterEvent(EventDefine.BalloomAppear, BalloomAppear);
-        EventManager.Instance.RegisterEvent(EventDefine.BalloomDesappear, BalloomDesappear);
+        EventManager.Instance.RegisterEvent(EventDefine.BalloomDisappear, BalloomDesappear);
     }
     public virtual void BalloomAppear(EventDefine define, object param1, object param2, object param3, object param4)
     {
@@ -46,11 +46,11 @@ public class Cannon : MonoBehaviour
     public virtual Ammo Shot()
     {
         Ammo ammo = CreateAmmo();
-        ammo.damage = damage;
+        ammo.attack = attack;
         ammo.puncture = puncture;
         ammo.target = target;
         ammo.speed = speed;
-        BattleFeild.Instance.gameObject.AddChild(ammo.gameObject);
+        BattleField.Instance.gameObject.AddChild(ammo.gameObject);
         ammo.direction = this.direction;
         ammo.transform.localPosition = this.transform.localPosition;
         return ammo;

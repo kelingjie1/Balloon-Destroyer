@@ -9,9 +9,9 @@ public class FollowAmmo : Ammo
     }
     public override Balloom FindTarget()
     {
-        if (BattleFeild.Instance.ballooms.Count > 0)
+        if (BattleField.Instance.ballooms.Count > 0)
         {
-            target = BattleFeild.Instance.ballooms[0];
+            target = BattleField.Instance.ballooms[0];
         }
         else
         {

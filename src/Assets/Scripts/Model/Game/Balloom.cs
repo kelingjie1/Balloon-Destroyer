@@ -4,8 +4,23 @@ using System.Collections.Generic;
 
 public class Balloom : MonoBehaviour 
 {
-
-    public float hp;            //生命
+    public float m_hp;
+    public float hp            //生命
+    {
+        get
+        {
+            return m_hp;
+        }
+        set
+        {
+            m_hp = value;
+            if (value>0)
+            {
+                float color = 1 - this.hp / BattleField.Instance.difficulty;
+                this.GetComponent<UISprite>().color = new Color(color, color, color);
+            }
+        }
+    }
     public float hardness;      //硬度
     public float armor;         //护甲
     public float speed;         //速度
@@ -18,25 +33,17 @@ public class Balloom : MonoBehaviour
     {
         EventManager.Instance.SendEvent(EventDefine.BalloomAppear, -1, this);
     }
-    public void Hit(float damage, float puncture)
+    public virtual void Hurt(float damage)
     {
-        if (puncture >= hardness)
+        this.hp -= damage;
+        if (this.hp < 0)
         {
-            if (damage>=armor)
-            {
-                hp -= damage - armor;
-                if (hp < 0)
-                {
-                    BattleFeild.Instance.ballooms.Remove(this);
-                    EventManager.Instance.SendEvent(EventDefine.BalloomDesappear, -1, this);
-                    GameObject.Destroy(this.gameObject);
-                }
-            }
             
+            BattleField.Instance.ballooms.Remove(this);
+            EventManager.Instance.SendEvent(EventDefine.BalloomDisappear, -1, this);
+            GameObject.Destroy(this.gameObject);
         }
-        
     }
-
 	public virtual void Update() 
     {
         this.transform.Translate(new Vector3(-Time.deltaTime * speed, 0, 0));

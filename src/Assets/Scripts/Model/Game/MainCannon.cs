@@ -6,7 +6,7 @@ public class MainCannon : Cannon
     public override void Awake()
     {
  	    base.Awake();
-        damage = 1;
+        attack = 1;
         shotSpeed = 2;
         speed = 1;
     }

@@ -8,15 +8,15 @@ public class AutoCannon : Cannon
     public override void Awake()
     {
         base.Awake();
-        damage = 1;
+        attack = 1;
         shotSpeed = 0.5f;
         speed = 1;
     }
     public override Balloom FindTarget()
     {
-        if (BattleFeild.Instance.ballooms.Count>0)
+        if (BattleField.Instance.ballooms.Count>0)
         {
-            target = BattleFeild.Instance.ballooms[0];
+            target = BattleField.Instance.ballooms[0];
         }
         else
         {
