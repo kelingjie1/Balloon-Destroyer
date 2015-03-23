@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class BattleFeild : MonoBehaviour 
 {
     public static BattleFeild Instance;
@@ -11,6 +12,7 @@ public class BattleFeild : MonoBehaviour
 	void Awake () 
     {
         Instance = this;
+		CannonManger.GetInstance();
 	}
 	
 	// Update is called once per frame
