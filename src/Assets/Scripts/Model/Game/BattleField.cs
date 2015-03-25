@@ -13,6 +13,9 @@ public class BattleField : MonoBehaviour
     {
         Instance = this;
 		CannonManger.GetInstance();
+
+		CannonItem nCannonItem = CannonItem.Create ();
+		this.gameObject.AddChild(nCannonItem.gameObject);
 	}
 	
 	// Update is called once per frame
