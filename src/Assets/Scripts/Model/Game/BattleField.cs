@@ -12,10 +12,10 @@ public class BattleField : MonoBehaviour
 	void Awake () 
     {
         Instance = this;
-		CannonManger.GetInstance();
+		//CannonManger.GetInstance();
 
-		CannonItem nCannonItem = CannonItem.Create ();
-		this.gameObject.AddChild(nCannonItem.gameObject);
+		//CannonItem nCannonItem = CannonItem.Create ();
+		//this.gameObject.AddChild(nCannonItem.gameObject);
 	}
 	
 	// Update is called once per frame

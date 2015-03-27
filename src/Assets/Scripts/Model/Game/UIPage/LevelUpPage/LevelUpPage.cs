@@ -10,7 +10,18 @@ public class LevelUpPage : MonoBehaviour
 		Instance = this;
 	}
 	
-
+	void Start()
+	{
+		Dictionary<CANNON_TYPE,  CannonData> nDtAllCannon = CannonManger.GetInstance().GetAllCannon ();
+		
+	
+		foreach (var item in nDtAllCannon)
+		{
+			CannonItem nCannonItem = CannonItem.Create ();
+			nCannonItem.m_stCannonData = item.Value;
+			this.gameObject.FindChild("UIGrid").AddChild(nCannonItem.gameObject);
+		}
+	}
 	void Update () 
 	{
 

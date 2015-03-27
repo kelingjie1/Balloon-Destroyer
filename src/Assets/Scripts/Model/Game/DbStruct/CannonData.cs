@@ -26,12 +26,11 @@ public class CannonData
 	public Dictionary<SKILL_TYPE,  int> m_DtComSkillLv = new Dictionary<SKILL_TYPE,  int>(); //普通技能对应的等级
 	public Dictionary<SKILL_TYPE,  int> m_DtAdvSkillLv = new Dictionary<SKILL_TYPE,  int>();//特殊技能对应的等级
 
-	public void CalculateAttr() //计算技能附加到塔属性
+	public void CalculateAttr()
 	{
 		foreach (var item in m_DtComSkillLv)
 		{
-			//SkillData 
-			//m_DtAttribute[item.Key]
+			int i = 0;
 		}
 	}
 }
@@ -66,13 +65,16 @@ public class OtherCannonData: CannonData
 
 public class CannonManger
 {	
-	private static CannonManger instance;
-	public static string m_strConfigFile = @"d:/test.data";
+	public static CannonManger instance = null;
+	public static string m_strConfigFile = @"d:\test.data";
 	
-	public Dictionary<CANNON_TYPE,  CannonData> m_DtAllCannon; //所有的塔
+	public Dictionary<CANNON_TYPE,  CannonData> m_DtAllCannon;
 	
-	
-	//获取出战的塔
+	public Dictionary<CANNON_TYPE, CannonData> GetAllCannon()
+	{
+		return m_DtAllCannon;
+	}
+
 	public Dictionary<CANNON_TYPE, CannonData> GetOnFightCannon()
 	{
 		Dictionary<CANNON_TYPE, CannonData> nDtCannon = new Dictionary<CANNON_TYPE, CannonData>();
@@ -84,7 +86,7 @@ public class CannonManger
 		return nDtCannon;
 	}
 	
-	//获取想到的塔
+
 	public CannonData GetCannonByType(CANNON_TYPE CannonType)
 	{
 		return m_DtAllCannon.ContainsKey (CannonType) ? m_DtAllCannon [CannonType] : null;
@@ -93,40 +95,45 @@ public class CannonManger
 	
 	public void CreateAllCannon()
 	{
-		//生成所有的canno
-		if (m_DtAllCannon == null) 
+		try
 		{
-			FileInfo fi = new FileInfo(USER_DEFINE.USER_CANNONDATA_PATH); 
-			if (!fi.Exists)
+			FileInfo fi = new FileInfo(m_strConfigFile); 
+			if (fi.Exists)  
 			{
-				//初始化一些数据
 				m_DtAllCannon = new Dictionary<CANNON_TYPE, CannonData>();
 				m_DtAllCannon [CANNON_TYPE.BASIC_CANNNON] = new BasicCannonData ();
 				m_DtAllCannon [CANNON_TYPE.OTHER_CANNON] = new OtherCannonData ();
 				SaveData2Db();
-
 			}
-			LoadDb2Data();
 
+			LoadDb2Data();
+			
 			foreach(var item  in m_DtAllCannon)
 			{
 				string outstream = item.Key.ToString();
+
 				Debug.Log(outstream);
 			}
 		}
+		catch(Exception ex)
+		{
+			Debug.Log ("error catch");
+		}
+	
 	}
 	public int LoadDb2Data()
 	{
 		BinarySerialize<Dictionary<CANNON_TYPE,  CannonData>> serializeIn
 			= new BinarySerialize<Dictionary<CANNON_TYPE,  CannonData>>(); 
 
-		m_DtAllCannon = serializeIn.DeSerialize(USER_DEFINE.USER_CANNONDATA_PATH); 
+		m_DtAllCannon = serializeIn.DeSerialize(m_strConfigFile); 
 		
 		if(m_DtAllCannon == null)
 		{
 			Debug.Log("LoadDb2Data data is empty");
 			return -1;
 		}
+
 		return 0;
 		
 	}
@@ -136,7 +143,7 @@ public class CannonManger
 		{
 			BinarySerialize<Dictionary<CANNON_TYPE,  CannonData>> serializeOut
 				= new BinarySerialize<Dictionary<CANNON_TYPE,  CannonData>>();   
-			serializeOut.Serialize(m_DtAllCannon, USER_DEFINE.USER_CANNONDATA_PATH);
+			serializeOut.Serialize(m_DtAllCannon, m_strConfigFile);
 		}
 		else
 		{
@@ -155,7 +162,7 @@ public class CannonManger
 	
 	~CannonManger()
 	{
-		SaveData2Db();
+		//SaveData2Db();
 	}
 	
 	

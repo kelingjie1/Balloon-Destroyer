@@ -15,7 +15,7 @@ public class BinarySerialize<T>
 	public void Serialize(T obj, string strFilePath)  
 	{  
 		_strFilePath = strFilePath;  
-		FileInfo fi = new FileInfo(_strFilePath);  
+		FileInfo fi = new FileInfo(_strFilePath);   
 		
 		using (FileStream fs = new FileStream(_strFilePath, FileMode.Create))  
 		{  
@@ -27,8 +27,8 @@ public class BinarySerialize<T>
 	public T DeSerialize(string filePath)  
 	{  
 		FileInfo fi = new FileInfo(filePath);  
-		//if (!fi.Exists)  
-		//	throw new ArgumentException("File specified is not exist!");  
+		if (!fi.Exists)  
+			throw new ArgumentException("File specified is not exist!");  
 		T t;  
 		using (FileStream fs = new FileStream(filePath, FileMode.Open))  
 		{  
