@@ -20,8 +20,7 @@ public class CannonItem : MonoBehaviour
         for(int k = 0;k < nUIGrid.transform.childCount;k++)
         {    
                 GameObject ntemp = nUIGrid.transform.GetChild(k).gameObject;
-                Destroy(ntemp);
-           
+                Destroy(ntemp);    
         }
        
         int i = 0;

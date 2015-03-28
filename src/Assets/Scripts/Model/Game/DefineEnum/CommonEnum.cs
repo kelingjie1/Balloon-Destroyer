@@ -26,12 +26,6 @@ public enum SKILL_TYPE
 	SKILL_FIRE,
 }
 
-public enum SKILL_ATT
-{
-	INCREATE_DAMAGE = 1,
-	INCREATE_SHOTSPEED,
-}
-
 //可能有很多种
 public enum SKILL_DESC_TYPE
 {

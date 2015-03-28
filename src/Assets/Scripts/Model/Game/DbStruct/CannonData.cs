@@ -26,12 +26,45 @@ public class CannonData
 	public Dictionary<SKILL_TYPE,  int> m_DtComSkillLv = new Dictionary<SKILL_TYPE,  int>(); //普通技能对应的等级
 	public Dictionary<SKILL_TYPE,  int> m_DtAdvSkillLv = new Dictionary<SKILL_TYPE,  int>();//特殊技能对应的等级
 
+    public CannonData()
+    {
+        m_DtAttribute[ATTRIBUTE.ATT_DAMAGE] = 1;
+        m_DtAttribute[ATTRIBUTE.ATT_SHOTSPEED] = 1;
+        m_DtAttribute[ATTRIBUTE.ATT_HP] = 1;
+    }
+    public void CalculatePriv(Dictionary<SKILL_TYPE, int> DtSkillLv, SKILL_DESC_TYPE nDescType)
+    {
+        foreach (var nSkllItem in DtSkillLv) //相加属性先做
+        {
+            int nSkillLevel = nSkllItem.Value;
+            SkillData nSkillData = SkillDataManger.GetInstance().GetSkillBySkillType(nSkllItem.Key);
+            //获取技能详细说明
+            foreach (var nSkillDesc in nSkillData.m_DtSkillEffect)
+            {
+                EffectsDesc nEffectsDesc = nSkillDesc.Value;
+                ATTRIBUTE nAttribute = nSkillDesc.Key;
+                if (nSkillDesc.Value.m_iSkillDescType == nDescType && nDescType == SKILL_DESC_TYPE.INCREATE_ADD)
+                {
+                    m_DtAttribute[nAttribute]
+                        += (nSkillDesc.Value.m_iBaseEffect + nSkillDesc.Value.m_iLevelUpEffect * nSkillLevel);
+                }
+                if (nSkillDesc.Value.m_iSkillDescType == nDescType && nDescType == SKILL_DESC_TYPE.INCREATE_MULT)
+                {
+                    m_DtAttribute[nAttribute]
+                        = m_DtAttribute[nAttribute] + m_DtAttribute[nAttribute] * (nSkillDesc.Value.m_iBaseEffect + nSkillDesc.Value.m_iLevelUpEffect * nSkillLevel);
+                }
+            }
+        }
+    }
+
 	public void CalculateAttr()
 	{
-		foreach (var item in m_DtComSkillLv)
-		{
-			int i = 0;
-		}
+        //先算加法
+        CalculatePriv(m_DtComSkillLv, SKILL_DESC_TYPE.INCREATE_ADD);
+        CalculatePriv(m_DtAdvSkillLv, SKILL_DESC_TYPE.INCREATE_ADD);
+        //后算乘法
+        CalculatePriv(m_DtComSkillLv, SKILL_DESC_TYPE.INCREATE_MULT);
+        CalculatePriv(m_DtAdvSkillLv, SKILL_DESC_TYPE.INCREATE_MULT);
 	}
 }
 
@@ -112,8 +145,8 @@ public class CannonManger
 			
 			foreach(var item  in m_DtAllCannon)
 			{
+                item.Value.CalculateAttr();
 				string outstream = item.Key.ToString();
-
 				Debug.Log(outstream);
 			}
 		}
