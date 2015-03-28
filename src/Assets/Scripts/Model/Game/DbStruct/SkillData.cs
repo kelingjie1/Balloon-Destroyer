@@ -21,7 +21,11 @@ public class SkillDataManger
 	}
 	
 	public Dictionary<SKILL_TYPE, SkillData> m_DtAllSkill;
-	
+
+    public SkillData  GetSkillBySkillType(SKILL_TYPE iSkill_type)
+    {
+        return m_DtAllSkill[iSkill_type];
+    }
 	SkillDataManger()
 	{
 		m_DtAllSkill [SKILL_TYPE.SKILL_HDMG] = new SkillHDmgData ();

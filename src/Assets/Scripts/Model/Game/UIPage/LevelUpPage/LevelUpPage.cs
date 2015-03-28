@@ -13,14 +13,18 @@ public class LevelUpPage : MonoBehaviour
 	void Start()
 	{
 		Dictionary<CANNON_TYPE,  CannonData> nDtAllCannon = CannonManger.GetInstance().GetAllCannon ();
-		
-	
-		foreach (var item in nDtAllCannon)
+        
+        GameObject nGrid = this.gameObject.FindChild("UIGrid");
+        UIGrid nUIGrid = nGrid.GetComponent<UIGrid>();
+		foreach (var data in nDtAllCannon)
 		{
 			CannonItem nCannonItem = CannonItem.Create ();
-			nCannonItem.m_stCannonData = item.Value;
-			this.gameObject.FindChild("UIGrid").AddChild(nCannonItem.gameObject);
+            nCannonItem.m_stCannonData = data.Value;
+           
+            nGrid.AddChild(nCannonItem.gameObject);
+    
 		}
+        nUIGrid.repositionNow = true;
 	}
 	void Update () 
 	{

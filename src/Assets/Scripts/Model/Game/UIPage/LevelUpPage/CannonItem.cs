@@ -10,9 +10,27 @@ public class CannonItem : MonoBehaviour
 		return ResourceManager.LoadGameObject("prefab/Game/LevelUpPage/CannonItem").AddComponent<CannonItem>();
 	}
 
-	public void OnClickForShowCannonDetail(GameObject button)
+	public void OnClickForShowCannonDetail(GameObject CannonItem)
 	{
 		Debug.Log ("on click CannonItem");
+
+        GameObject nGrid = LevelUpPage.Instance.gameObject.FindChild("SkillUIGrid");
+        UIGrid nUIGrid = nGrid.GetComponent<UIGrid>();
+     
+       for(int k = 0;k < nUIGrid.transform.childCount;k++)
+       {
+                GameObject ntemp = nUIGrid.transform.GetChild(k).gameObject;
+                Destroy(ntemp);
+           
+        }
+        foreach (var item in m_stCannonData.m_DtComSkillLv)
+        {
+            SkillItem nSkillItem = SkillItem.Create();
+            nSkillItem.m_kvComSkillAndLevel = item;
+            nGrid.AddChild(nSkillItem.gameObject);
+        }
+        nUIGrid.repositionNow = true;
+
 	}
 	void Awake()
 	{
@@ -23,12 +41,6 @@ public class CannonItem : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		foreach ( var item in m_stCannonData.m_DtComSkillLv)
-		{
-			SkillItem nSkillItem = SkillItem.Create(); 
-			LevelUpPage.Instance.gameObject.FindChild("SkillUIGrid").AddChild(nSkillItem.gameObject);
-
-		}
 
 	}
 	// Update is called once per frame

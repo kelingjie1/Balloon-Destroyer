@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SkillItem : MonoBehaviour {
 
-	SkillItem m_stCannonData; //一个技能
+
+    public KeyValuePair<SKILL_TYPE, int> m_kvComSkillAndLevel;
 	public static SkillItem Create()
 	{
 		return ResourceManager.LoadGameObject("prefab/Game/LevelUpPage/SkillItem").AddComponent<SkillItem>();
@@ -12,7 +14,7 @@ public class SkillItem : MonoBehaviour {
 
 	void Awake()
 	{
-
+        
 
 	}
 	

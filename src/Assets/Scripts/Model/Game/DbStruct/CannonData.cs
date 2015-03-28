@@ -45,6 +45,7 @@ public class BasicCannonData: CannonData
 		//基础属性初始化
 		m_DtAttribute [ATTRIBUTE.ATT_DAMAGE] = 10;
 		m_DtComSkillLv [SKILL_TYPE.SKILL_HDMG] = 1;
+        m_DtComSkillLv[SKILL_TYPE.SKILL_HSPED] = 2;
 		
 	}
 }
