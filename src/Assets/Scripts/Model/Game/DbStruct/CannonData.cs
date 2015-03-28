@@ -41,11 +41,12 @@ public class BasicCannonData: CannonData
 	public BasicCannonData()
 	{
 		m_strCannonName = "自动炮塔";
-		m_strPicPath = "./1.pic";
+		m_strPicPath = "ta1";
 		//基础属性初始化
 		m_DtAttribute [ATTRIBUTE.ATT_DAMAGE] = 10;
 		m_DtComSkillLv [SKILL_TYPE.SKILL_HDMG] = 1;
         m_DtComSkillLv[SKILL_TYPE.SKILL_HSPED] = 2;
+        m_DtComSkillLv[SKILL_TYPE.SKILL_FIRE] = 2;
 		
 	}
 }
@@ -56,7 +57,7 @@ public class OtherCannonData: CannonData
 	public OtherCannonData()
 	{
 		m_strCannonName = "其它炮塔";
-		m_strPicPath = "./2.pic";
+		m_strPicPath = "ta2";
 		//基础属性初始化
 		m_DtAttribute [ATTRIBUTE.ATT_DAMAGE] = 20;
 		m_DtComSkillLv [SKILL_TYPE.SKILL_HSPED] = 1;

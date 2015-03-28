@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class SkillDataManger
 {
-	private static SkillDataManger instance;
+    public static SkillDataManger instance;
 	public  static SkillDataManger GetInstance () 
 	{
 		if (instance == null) 
@@ -19,22 +19,25 @@ public class SkillDataManger
 		}
 		return instance;
 	}
-	
-	public Dictionary<SKILL_TYPE, SkillData> m_DtAllSkill;
+
+    public Dictionary<SKILL_TYPE, SkillData> m_DtAllSkill = new Dictionary<SKILL_TYPE, SkillData>();
 
     public SkillData  GetSkillBySkillType(SKILL_TYPE iSkill_type)
     {
         return m_DtAllSkill[iSkill_type];
     }
-	SkillDataManger()
+	public SkillDataManger()
 	{
 		m_DtAllSkill [SKILL_TYPE.SKILL_HDMG] = new SkillHDmgData ();
 		m_DtAllSkill [SKILL_TYPE.SKILL_HSPED] = new SkillHSpedData ();
+        m_DtAllSkill [SKILL_TYPE.SKILL_FIRE] = new SkillFireData();
 	}
 }
 
 public class SkillData
 {
+	public string m_strSillName;
+	public string m_strSkillPic;
 	public Dictionary<SKILL_ATT, EffectsDesc> m_DtSkillEffect = new Dictionary<SKILL_ATT, EffectsDesc>(); //技能生成的效果
 }
 
@@ -60,8 +63,9 @@ public class SkillHDmgData : SkillData
 {
 	public SkillHDmgData()
 	{
+		m_strSkillPic = "1_skill";
 		EffectsDesc nEffectsDesc = new EffectsDesc (10, 5, SKILL_DESC_TYPE.INCREATE_ADD);
-		m_DtSkillEffect[SKILL_ATT.INCREATE_DAMAGE] = nEffectsDesc;
+		m_DtSkillEffect[SKILL_ATT.INCREATE_DAMAGE] = new EffectsDesc (10, 5, SKILL_DESC_TYPE.INCREATE_ADD);
 	}
 }
 
@@ -70,7 +74,18 @@ public class SkillHSpedData : SkillData
 {
 	public SkillHSpedData()
 	{
+		m_strSkillPic = "2_skill";
 		EffectsDesc nEffectsDesc = new EffectsDesc (2, 0.1f, SKILL_DESC_TYPE.INCREATE_MULT);
+		m_DtSkillEffect[SKILL_ATT.INCREATE_SHOTSPEED] = nEffectsDesc;
+	}
+}
+
+public class SkillFireData : SkillData
+{
+	public SkillFireData()
+	{
+		m_strSkillPic = "3_skill";
+		EffectsDesc nEffectsDesc = new EffectsDesc (10, 0.2f, SKILL_DESC_TYPE.INCREATE_MULT);
 		m_DtSkillEffect[SKILL_ATT.INCREATE_SHOTSPEED] = nEffectsDesc;
 	}
 }
