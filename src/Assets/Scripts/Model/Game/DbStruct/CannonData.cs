@@ -100,7 +100,7 @@ public class CannonManger
 		try
 		{
 			FileInfo fi = new FileInfo(m_strConfigFile); 
-			if (fi.Exists)  
+			if (!fi.Exists)  
 			{
 				m_DtAllCannon = new Dictionary<CANNON_TYPE, CannonData>();
 				m_DtAllCannon [CANNON_TYPE.BASIC_CANNNON] = new BasicCannonData ();

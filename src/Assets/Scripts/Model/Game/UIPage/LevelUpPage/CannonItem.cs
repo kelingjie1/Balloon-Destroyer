@@ -29,7 +29,8 @@ public class CannonItem : MonoBehaviour
         foreach (var item in m_stCannonData.m_DtComSkillLv)
         {
             SkillItem nSkillItem = SkillItem.Create();
-            nSkillItem.m_kvComSkillAndLevel = item;
+            nSkillItem.m_stParentCannon = m_stCannonData;
+            nSkillItem.m_iSkillType = item.Key;
 
 			nSkillItem.gameObject.name = "SkillItem_" + item.Key.ToString();
 			nSkillItem.gameObject.GetComponent<UISprite>().spriteName 
