@@ -68,7 +68,7 @@ public class OtherCannonData: CannonData
 public class CannonManger
 {	
 	public static CannonManger instance = null;
-	public static string m_strConfigFile = @"d:\test.data";
+    public static string m_strConfigFile = USER_DEFINE.USER_CANNONDATA_PATH;
 	
 	public Dictionary<CANNON_TYPE,  CannonData> m_DtAllCannon;
 	
