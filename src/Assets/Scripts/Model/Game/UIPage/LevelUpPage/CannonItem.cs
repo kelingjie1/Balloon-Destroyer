@@ -13,7 +13,7 @@ public class CannonItem : MonoBehaviour
 	public void OnClickForShowCannonDetail(GameObject CannonItem)
 	{
 		Debug.Log ("on click CannonItem");
-
+       
         GameObject nGrid = LevelUpPage.Instance.gameObject.FindChild("SkillUIGrid");
         UIGrid nUIGrid = nGrid.GetComponent<UIGrid>();
      
@@ -55,7 +55,7 @@ public class CannonItem : MonoBehaviour
 	}
 	// Update is called once per frame
 	void Update () {
-	
+       
 	}
 }
 
