@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public enum CannonAttrbute
+public enum CannonAttribute
 {
     Attack = 1,
     Speed,              //子弹飞行速度

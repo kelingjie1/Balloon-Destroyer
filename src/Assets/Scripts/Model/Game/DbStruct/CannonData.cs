@@ -20,16 +20,22 @@ public class CannonData
 	public bool  m_bOnFight = false; //是否在出战状态
 	public bool  m_bUnLock = false;  //是否解锁
 
-	public Dictionary<CannonAttrbute, float> m_DtAttribute= new Dictionary<CannonAttrbute, float>();//基础属性
+	public Dictionary<CannonAttribute, float> m_DtAttribute= new Dictionary<CannonAttribute, float>();//基础属性
 
 	
 	public Dictionary<SKILL_TYPE,  int> m_DtComSkillLv = new Dictionary<SKILL_TYPE,  int>(); //普通技能对应的等级
 	public Dictionary<SKILL_TYPE,  int> m_DtAdvSkillLv = new Dictionary<SKILL_TYPE,  int>();//特殊技能对应的等级
 
+    public float GetAttrbute(CannonAttribute attribute)
+    {
+        float value = 0;
+        m_DtAttribute.TryGetValue(attribute,out value);
+        return value;
+    }
     public CannonData()
     {
-        m_DtAttribute[CannonAttrbute.Attack] = 1;
-        m_DtAttribute[CannonAttrbute.ShotSpeed] = 1;
+        m_DtAttribute[CannonAttribute.Attack] = 1;
+        m_DtAttribute[CannonAttribute.ShotSpeed] = 1;
     }
     public void CalculatePriv(Dictionary<SKILL_TYPE, int> DtSkillLv, SKILL_DESC_TYPE nDescType)
     {
@@ -41,7 +47,7 @@ public class CannonData
             foreach (var nSkillDesc in nSkillData.m_DtSkillEffect)
             {
                 EffectsDesc nEffectsDesc = nSkillDesc.Value;
-                CannonAttrbute nAttribute = nSkillDesc.Key;
+                CannonAttribute nAttribute = nSkillDesc.Key;
                 if (nSkillDesc.Value.m_iSkillDescType == nDescType && nDescType == SKILL_DESC_TYPE.INCREATE_ADD)
                 {
                     m_DtAttribute[nAttribute]
@@ -75,7 +81,7 @@ public class BasicCannonData: CannonData
 		m_strCannonName = "自动炮塔";
 		m_strPicPath = "ta1";
 		//基础属性初始化
-		m_DtAttribute [CannonAttrbute.Attack] = 10;
+		m_DtAttribute [CannonAttribute.Attack] = 10;
 		m_DtComSkillLv [SKILL_TYPE.SKILL_HDMG] = 1;
         m_DtComSkillLv[SKILL_TYPE.SKILL_HSPED] = 2;
         m_DtComSkillLv[SKILL_TYPE.SKILL_FIRE] = 2;
@@ -91,7 +97,7 @@ public class OtherCannonData: CannonData
 		m_strCannonName = "其它炮塔";
 		m_strPicPath = "ta2";
 		//基础属性初始化
-		m_DtAttribute [CannonAttrbute.Attack] = 20;
+		m_DtAttribute [CannonAttribute.Attack] = 20;
 		m_DtComSkillLv [SKILL_TYPE.SKILL_HSPED] = 1;
 		
 	}

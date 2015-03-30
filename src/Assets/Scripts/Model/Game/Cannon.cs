@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class Cannon : MonoBehaviour
 {
     public BasicCannonData data;
-    public float speed;         //子弹飞行速度
     public float attack;        //攻击力
+    public float speed;         //子弹飞行速度
     public int puncture;        //穿透
     public float armorBreak;    //破甲
     public float shotSpeed;     //攻击速度

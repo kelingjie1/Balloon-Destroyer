@@ -40,7 +40,7 @@ public class SkillData
 	public string m_strSkillName;
 	public string m_strSkillPic;
     public string m_strSkillDesc;
-    public Dictionary<CannonAttrbute, EffectsDesc> m_DtSkillEffect = new Dictionary<CannonAttrbute, EffectsDesc>(); //技能生成的效果
+    public Dictionary<CannonAttribute, EffectsDesc> m_DtSkillEffect = new Dictionary<CannonAttribute, EffectsDesc>(); //技能生成的效果
 }
 
 
@@ -69,7 +69,7 @@ public class SkillHDmgData : SkillData
         m_strSkillDesc = "This skill is very userfull,its base attack 10 and 5 attack added when levelup";
 		m_strSkillPic = "1_skill";
 		EffectsDesc nEffectsDesc = new EffectsDesc (10, 5, SKILL_DESC_TYPE.INCREATE_ADD);
-        m_DtSkillEffect[CannonAttrbute.Attack] = new EffectsDesc(10, 5, SKILL_DESC_TYPE.INCREATE_ADD);
+        m_DtSkillEffect[CannonAttribute.Attack] = new EffectsDesc(10, 5, SKILL_DESC_TYPE.INCREATE_ADD);
 	}
 }
 
@@ -82,7 +82,7 @@ public class SkillHSpedData : SkillData
         m_strSkillDesc = "Sown skill can help you contorl some powerfull master,its base chance 2% and 0.1% added when levelup";
 		m_strSkillPic = "2_skill";
 		EffectsDesc nEffectsDesc = new EffectsDesc (0.2f, 0.01f, SKILL_DESC_TYPE.INCREATE_MULT);
-        m_DtSkillEffect[CannonAttrbute.ShotSpeed] = nEffectsDesc;
+        m_DtSkillEffect[CannonAttribute.ShotSpeed] = nEffectsDesc;
 	}
 }
 
@@ -94,6 +94,6 @@ public class SkillFireData : SkillData
         m_strSkillDesc = "Deadly Deadly can kill master easily,it raise speed 10% and 0.2% added when levelup";
 		m_strSkillPic = "3_skill";
 		EffectsDesc nEffectsDesc = new EffectsDesc (0.1f, 0.02f, SKILL_DESC_TYPE.INCREATE_MULT);
-        m_DtSkillEffect[CannonAttrbute.ShotSpeed] = nEffectsDesc;
+        m_DtSkillEffect[CannonAttribute.ShotSpeed] = nEffectsDesc;
 	}
 }
