@@ -5,13 +5,14 @@ using System.Collections.Generic;
 
 public class Cannon : MonoBehaviour
 {
+    public BasicCannonData data;
     public float speed;         //子弹飞行速度
-    public Balloom target;      //瞄准目标
     public float attack;        //攻击力
     public int puncture;        //穿透
     public float armorBreak;    //破甲
     public float shotSpeed;     //攻击速度
     public float investigation; //侦查力
+    public Balloom target;      //瞄准目标
     public Vector3 direction = new Vector3(1, 0, 0);
     
     public float restTime;
