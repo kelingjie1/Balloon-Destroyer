@@ -12,7 +12,7 @@ public class LevelUpPage : MonoBehaviour
 	
 	void Start()
 	{
-        MapListManger.GetInstance();
+        
 		Dictionary<CANNON_TYPE,  CannonData> nDtAllCannon = CannonManger.GetInstance().GetAllCannon ();
         ProfileManger.GetInstance().CreateProfile();
         //ProfileManger.GetInstance().m_stProfileData.m_fMoney += 0.5f;
