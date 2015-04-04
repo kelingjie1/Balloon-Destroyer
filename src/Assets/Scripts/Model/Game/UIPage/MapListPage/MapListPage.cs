@@ -32,7 +32,7 @@ public class MapListPage : MonoBehaviour
 
             GameObject nMapItemOB = gameObject.FindChild(nMapItem.gameObject.name);
             //显示lable
-            nMapItemOB.FindChild("MapLabel").GetComponent<UILabel>().text = "Map " + nMapData[i].m_iIndex.ToString();
+            nMapItemOB.FindChild("MapLabel").GetComponent<UILabel>().text = "Map " + (nMapData[i].m_iIndex + 1).ToString();
            
             //解锁图片是否显示
             if (nMapData[i].m_bLock == false)
@@ -42,7 +42,7 @@ public class MapListPage : MonoBehaviour
     
             }
             //特殊图片
-            if ((i + 1) % 10 == 0)
+            if ((i + 1) % 10 == 0 )
             {
                 gameObject.FindChild(nMapItem.gameObject.name).GetComponent<UISprite>().spriteName = nMapData[i].m_strPic;
             }

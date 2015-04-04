@@ -23,6 +23,8 @@ public class MapData
 public class MapListManger
 {
     public static MapListManger instance = null;
+    public static int m_iCurrSectionIndex = 1;
+    public static int m_iCurrMapIndex = 1;
 
     public List<SectionData> m_LtSectionData;
     public static MapListManger GetInstance()
@@ -34,12 +36,26 @@ public class MapListManger
         }
         return instance;
     }
+    public void GetCurrSectionMapById(SectionData sectionData, MapData mapData)
+    {
+        if(sectionData == null)
+            sectionData = new SectionData();
+        sectionData = m_LtSectionData[m_iCurrSectionIndex];
+        if (mapData == null)
+            mapData = new MapData();
+        mapData = m_LtSectionData[m_iCurrSectionIndex].m_LtMapData[m_iCurrMapIndex];
+    }
+   
 
     MapListManger()
     {
         m_LtSectionData = new List<SectionData>();
         ProfileData nProfileData =  ProfileManger.GetInstance().m_stProfileData;
-        for (int i = 1; i < COMM_DEFINE.MAX_SECTION_NUM; ++i)
+        //当前通关关卡
+        m_iCurrSectionIndex = nProfileData.m_iMapIndex / 100;
+        m_iCurrMapIndex = nProfileData.m_iMapIndex % 100;
+
+        for (int i = 0; i < COMM_DEFINE.MAX_SECTION_NUM; ++i)
         {
             SectionData stSectionData = new SectionData();
             stSectionData.m_iIndex = i;         
@@ -48,14 +64,14 @@ public class MapListManger
 
             stSectionData.m_LtMapData = new List<MapData>();
 
-            for(int j = 1 ;j < COMM_DEFINE.MAX_MAPS_IN_SECTION; ++j)
+            for(int j = 0 ;j < COMM_DEFINE.MAX_MAPS_IN_SECTION; ++j)
             {
                 MapData stMapData = new MapData();
                 stMapData.m_iIndex = j;
                 stMapData.m_fDifficult = (float)((j % 10 == 0) ? (j * 0.1 + 0.2) : j * 0.1);
-                stMapData.m_strPic = ((j % 10 == 0) ? "supermapicon" : "mapicon");
+                stMapData.m_strPic = (((j+1) % 10 == 0) ? "supermapicon" : "mapicon");
 
-                if (((i-1) * COMM_DEFINE.MAX_MAPS_IN_SECTION + j) <= nProfileData.m_iMapIndex)
+                if ((i * COMM_DEFINE.MAX_MAPS_IN_SECTION + j) <= nProfileData.m_iMapIndex)
                 {
                     stMapData.m_bLock = false;
                 }
