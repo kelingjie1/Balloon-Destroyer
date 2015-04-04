@@ -10,13 +10,15 @@ public class MapItem : MonoBehaviour
         return ResourceManager.LoadGameObject("prefab/Game/MapListPage/MapItem").AddComponent<MapItem>();
     }
 
-    public void OnClickForShowCannonDetail(GameObject CannonItem)
+    public void OnClickForBattleField(GameObject CannonItem)
     {
-      
+        
+        //PageManager.Instance.ShowPage(BattleField.Instance);
+
     }
     void Awake()
     {
-        //UIEventListener.Get(gameObject.FindChild("CannonItemButton")).onClick = OnClickForShowCannonDetail;
+        UIEventListener.Get(this.gameObject).onClick = OnClickForBattleField;
 
     }
 

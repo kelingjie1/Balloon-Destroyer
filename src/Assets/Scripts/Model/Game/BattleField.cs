@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class BattleField : MonoBehaviour 
+public class BattleField : BasePage 
 {
     public static BattleField Instance;
     public List<Balloom> ballooms = new List<Balloom>();
     public float difficulty = 5;
     float restTime;
+
+
 	void Awake () 
     {
+        ResourceManager.LoadGameObject("prefab/Game/BattleField").AddComponent<BattleField>();
         Instance = this;
 		//CannonManger.GetInstance();
 
