@@ -14,7 +14,7 @@ public class LevelUpPage : MonoBehaviour
 	{
         
 		Dictionary<CANNON_TYPE,  CannonData> nDtAllCannon = CannonManger.GetInstance().GetAllCannon ();
-        ProfileManger.GetInstance().CreateProfile();
+        //ProfileManger.GetInstance().CreateProfile();
         //ProfileManger.GetInstance().m_stProfileData.m_fMoney += 0.5f;
         //ProfileManger.GetInstance().SaveData2Db();
         GameObject nGrid = this.gameObject.FindChild("UIGrid");

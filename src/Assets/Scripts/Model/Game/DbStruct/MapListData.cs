@@ -14,8 +14,10 @@ public class SectionData
 }
 public class MapData
 {
-    public float m_fDifficult;
-    public int   m_iIndex;
+    public float    m_fDifficult;
+    public int      m_iIndex;
+    public string   m_strPic;
+    public bool     m_bLock = true;
 }
 
 public class MapListManger
@@ -36,6 +38,7 @@ public class MapListManger
     MapListManger()
     {
         m_LtSectionData = new List<SectionData>();
+        ProfileData nProfileData =  ProfileManger.GetInstance().m_stProfileData;
         for (int i = 1; i < COMM_DEFINE.MAX_SECTION_NUM; ++i)
         {
             SectionData stSectionData = new SectionData();
@@ -50,8 +53,15 @@ public class MapListManger
                 MapData stMapData = new MapData();
                 stMapData.m_iIndex = j;
                 stMapData.m_fDifficult = (float)((j % 10 == 0) ? (j * 0.1 + 0.2) : j * 0.1);
+                stMapData.m_strPic = ((j % 10 == 0) ? "supermapicon" : "mapicon");
+
+                if (((i-1) * COMM_DEFINE.MAX_MAPS_IN_SECTION + j) <= nProfileData.m_iMapIndex)
+                {
+                    stMapData.m_bLock = false;
+                }
                 stSectionData.m_LtMapData.Add(stMapData);
             }
+           
             m_LtSectionData.Add(stSectionData);
         }
     }

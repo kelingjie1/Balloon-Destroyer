@@ -10,7 +10,7 @@ public class ProfileData
     public float m_fMoney = 0.2f;
     public int m_iUserLevel = 1;
     public int m_iSectionIndex = 1;
-    public int m_iMapIndex = 1;
+    public int m_iMapIndex = 13;
 
     //荣誉系统
     //任务系统
@@ -40,7 +40,8 @@ public class ProfileManger
     {
         SaveData2Db();
     }
-    public void CreateProfile()
+
+    private void CreateProfile()
     {
         try
         {
