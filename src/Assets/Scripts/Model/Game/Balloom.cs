@@ -47,7 +47,7 @@ public class Balloom : MonoBehaviour
 	public virtual void Update() 
     {
         this.transform.Translate(new Vector3(-Time.deltaTime * speed, 0, 0));
-        if (this.transform.localPosition.x > Screen.width || this.transform.localPosition.x < -Screen.width || this.transform.localPosition.y > Screen.height || this.transform.localPosition.y < -Screen.height)
+        if (this.transform.localPosition.x > Screen.width || this.transform.localPosition.x < -Screen.width/2 || this.transform.localPosition.y > Screen.height || this.transform.localPosition.y < -Screen.height)
         {
             GameObject.Destroy(this.gameObject);
         }
